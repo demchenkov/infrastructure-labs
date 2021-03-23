@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  web:
+    image: ${DOCKER_REGISTRY-}web
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "IdentityServer__Key__Type=Development"
+    ports:
+      - "5000:80"
+    restart: on-failure

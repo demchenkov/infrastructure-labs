@@ -1,0 +1,21 @@
+<div class="d-flex dialog-title align-items-center mb-4">
+  <h2 mat-dialog-title>{{options.title}}</h2>
+  <span (click)="onCancel()" class="ml-auto icon-Icon-Close-24 pointer"></span>
+</div>
+<div class="mb-3" mat-dialog-content>
+  <div *ngFor="let tmpl of options.template" [innerHTML]="tmpl" class='mat-body'></div>
+</div>
+
+<div class="d-flex justify-content-end" mat-dialog-actions>
+  <button *ngIf="options.cancelText"
+          (click)="onCancel()"
+          class="base-button"
+          mat-button
+          mat-stroked-button>{{options.cancelText}}</button>
+  <button (click)="onClose()"
+          [disabled]="options.requirePrompt && !prompted"
+          cdkFocusInitial
+          class="base-button ml-3"
+          color="primary"
+          mat-flat-button>{{options.confirmText}}</button>
+</div>

@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <div class="mat-elevation-z8">
+    <div class="loading-shade" *ngIf="isLoading$ | async; else table">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <div class="table-container">
+      <ng-template #table>
+        <form [formGroup]="form" class="d-block mx-3"> 
+          <mat-checkbox class="mx-4 py-2" placeholder="Show All" formControlName="showAll">Show All</mat-checkbox>
+
+          <span *ngIf="!form.get('showAll').value">
+            <mat-checkbox class="mx-4 py-2" placeholder="Payment" formControlName="isPayment">Payment</mat-checkbox>
+      
+            <mat-checkbox class="mx-4 py-2" placeholder="Done" formControlName="isDone">Done</mat-checkbox>
+          </span>
+          
+        </form>
+
+
+        <mat-table [dataSource]="data$ | async" matSort matSortDisableClear matSortDirection="desc">
+          <!--id Column-->
+          <ng-container matColumnDef="id">
+            <mat-header-cell  *matHeaderCellDef>#</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="name">
+            <mat-header-cell  *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="address">
+            <mat-header-cell  *matHeaderCellDef>Address</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.address}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="phone">
+            <mat-header-cell  *matHeaderCellDef>Phone</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.phone}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="passport">
+            <mat-header-cell  *matHeaderCellDef>Passport</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.passport}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="orderDate">
+            <mat-header-cell  *matHeaderCellDef>Order Date</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.orderDate | date:'mediumDate'}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="saleDate">
+            <mat-header-cell  *matHeaderCellDef>Sale Date</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.saleDate | date:'mediumDate'}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="isDone">
+            <mat-header-cell  *matHeaderCellDef>Done</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.isDone ? 'Yes' : 'No'}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="isPayment">
+            <mat-header-cell  *matHeaderCellDef>Payment</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.isPayment ? 'Yes' : 'No'}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="prepaymentPercentage">
+            <mat-header-cell  *matHeaderCellDef>Prepayment Percentage</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.prepaymentPercentage}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="car">
+            <mat-header-cell  *matHeaderCellDef>Car</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.car?.brand}}</mat-cell>
+          </ng-container>
+
+          
+          <ng-container matColumnDef="employee">
+            <mat-header-cell  *matHeaderCellDef>Employee</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.employee?.fullName}}</mat-cell>
+          </ng-container>
+  
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              <button mat-icon-button color="primary" (click)="addNew()">
+                <mat-icon aria-label="Create">add</mat-icon>
+              </button>
+            </mat-header-cell>
+  
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="accent" (click)="editRow(i, row)">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+  
+              <button mat-icon-button color="accent" (click)="deleteRow(i, row)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+    
+          <mat-header-row  *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </ng-template>
+    </div>
+  </div>
+</div>

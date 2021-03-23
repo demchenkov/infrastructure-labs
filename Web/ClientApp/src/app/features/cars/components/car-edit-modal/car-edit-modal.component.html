@@ -1,0 +1,97 @@
+<sb-modal (confirm)="onConfirm()"  [title]="getTitle()">
+  <form [formGroup]="form"> 
+    <mat-form-field class="w-100">
+      <mat-label>Car brand</mat-label>
+      <input matInput placeholder="brand" formControlName="brand">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Manufacture Date</mat-label>
+      <input matInput [matDatepicker]="dp" readonly formControlName="manufactureDate" placeholder="manufactureDate">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp ></mat-datepicker>
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Car color</mat-label>
+      <input matInput placeholder="color" formControlName="color">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Car bodyNumber</mat-label>
+      <input matInput placeholder="bodyNumber" formControlName="bodyNumber">
+    </mat-form-field>
+
+    
+    <!-- <mat-form-field class="w-100">
+      <mat-label>Car characteristics</mat-label>
+      <input matInput placeholder="characteristics" formControlName="characteristics">
+    </mat-form-field> -->
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Car price</mat-label>
+      <input matInput placeholder="price" formControlName="price" type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Car body</mat-label>
+      <mat-select formControlName="carBodyId" placeholder="Car body" >
+        <mat-option *ngFor="let entity of data.bodies" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Manufacturer</mat-label>
+      <mat-select formControlName="manufacturerId" placeholder="Manufacturer" >
+        <mat-option *ngFor="let entity of data.manufacturers" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>First Equipment</mat-label>
+      <mat-select formControlName="equipment1Id"placeholder="First Equipment" >
+        <mat-option *ngFor="let entity of data.equipments" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Second Equipment</mat-label>
+      <mat-select formControlName="equipment2Id"placeholder="Second Equipment" >
+        <mat-option *ngFor="let entity of data.equipments" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Third Equipment</mat-label>
+      <mat-select formControlName="equipment3Id" placeholder="Third Equipment" >
+        <mat-option *ngFor="let entity of data.equipments" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Employee</mat-label>
+      <mat-select formControlName="employeeId" placeholder="Employee" >
+        <mat-option *ngFor="let entity of data.employees" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+  </form>
+</sb-modal>

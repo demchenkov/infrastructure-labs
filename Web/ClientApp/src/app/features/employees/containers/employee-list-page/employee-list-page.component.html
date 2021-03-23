@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="mat-elevation-z8">
+    <div class="loading-shade" *ngIf="isLoading$ | async; else table">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <div class="table-container">
+      <ng-template #table>
+        <mat-table [dataSource]="data$ | async" matSort matSortDisableClear matSortDirection="desc">
+          <!--id Column-->
+          <ng-container matColumnDef="id">
+            <mat-header-cell  *matHeaderCellDef>#</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="fullName">
+            <mat-header-cell  *matHeaderCellDef>Full Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.fullName}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="age">
+            <mat-header-cell  *matHeaderCellDef>Age</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.age}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="gender">
+            <mat-header-cell  *matHeaderCellDef>Gender</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.gender}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="address">
+            <mat-header-cell  *matHeaderCellDef>Address</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.address}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="phone">
+            <mat-header-cell  *matHeaderCellDef>Phone</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.phone}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="passport">
+            <mat-header-cell  *matHeaderCellDef>Passport</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.passport}}</mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="position">
+            <mat-header-cell  *matHeaderCellDef>Position</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.position?.name}}</mat-cell>
+          </ng-container>
+  
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              <button mat-icon-button color="primary" (click)="addNew()">
+                <mat-icon aria-label="Create">add</mat-icon>
+              </button>
+            </mat-header-cell>
+  
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="accent" (click)="editRow(i, row)">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+  
+              <button mat-icon-button color="accent" (click)="deleteRow(i, row)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+    
+          <mat-header-row  *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<sb-modal (confirm)="onConfirm()"  [title]="getTitle()">
+  <form [formGroup]="form">     
+    <mat-form-field class="w-100">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="Address" formControlName="address">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Phone</mat-label>
+      <input matInput placeholder="Phone" formControlName="phone" type="tel">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Passport</mat-label>
+      <input matInput placeholder="Passport" formControlName="passport">
+    </mat-form-field>
+
+    
+    <mat-form-field class="w-100">
+      <mat-label>Order Date</mat-label>
+      <input matInput [matDatepicker]="dp1" readonly  placeholder="Order Date" formControlName="orderDate">
+      <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1 ></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Sale Date</mat-label>
+      <input matInput [matDatepicker]="dp2" readonly  placeholder="Sale Date" formControlName="saleDate">
+      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+      <mat-datepicker #dp2 ></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox class="w-100" placeholder="Payment" formControlName="isPayment">Payment</mat-checkbox>
+
+    <mat-checkbox class="w-100" placeholder="Done" formControlName="isDone">Done</mat-checkbox>
+    
+    <mat-form-field class="w-100">
+      <mat-label>Prepayment Percentage</mat-label>
+      <input matInput placeholder="prepaymentPercentage" formControlName="prepaymentPercentage">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Car</mat-label>
+      <mat-select placeholder="Car" formControlName="carId" >
+        <mat-option *ngFor="let entity of data.cars" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Employee</mat-label>
+      <mat-select placeholder="Employee" formControlName="employeeId" >
+        <mat-option *ngFor="let entity of data.employees" [value]="entity.key">
+          {{entity.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</sb-modal>

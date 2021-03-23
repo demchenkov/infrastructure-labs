@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  <div class="mat-elevation-z8">
+    <div class="loading-shade" *ngIf="isLoading$ | async; else table">
+      <mat-spinner></mat-spinner>
+    </div>
+  
+    <div class="table-container">
+      <ng-template #table>
+        <form [formGroup]="form" class="d-block mx-3"> 
+          <mat-checkbox class="mx-4 py-5" placeholder="Show All" formControlName="showAll">Show All</mat-checkbox>
+
+          <span *ngIf="!form.get('showAll').value">
+            <mat-form-field class="mx-2">
+              <mat-label>Employee</mat-label>
+              <mat-select formControlName="employeeId" placeholder="Employee" >
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let entity of employees$ |async" [value]="entity.id">
+                  {{entity.fullName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+            <mat-form-field class="mx-2">
+              <mat-label>Car body</mat-label>
+              <mat-select formControlName="carBodyId" placeholder="Car body" >
+                <mat-option>-</mat-option>
+                <mat-option *ngFor="let entity of bodies$ | async" [value]="entity.id">
+                  {{entity.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+          
+        </form>
+
+
+        <mat-table [dataSource]="data$ | async" matSort matSortDisableClear matSortDirection="desc">
+          <!--id Column-->
+          <ng-container matColumnDef="id">
+            <mat-header-cell  *matHeaderCellDef>#</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="brand">
+            <mat-header-cell  *matHeaderCellDef>brand</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.brand}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="manufactureDate">
+            <mat-header-cell  *matHeaderCellDef>manufactureDate</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.manufactureDate | date:'mediumDate'}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="color">
+            <mat-header-cell  *matHeaderCellDef>color</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.color}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="bodyNumber">
+            <mat-header-cell  *matHeaderCellDef>bodyNumber</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.bodyNumber}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="characteristics">
+            <mat-header-cell  *matHeaderCellDef>characteristics</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.characteristics}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="price">
+            <mat-header-cell  *matHeaderCellDef>price</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.price}}</mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="carBody">
+            <mat-header-cell  *matHeaderCellDef>carBody</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.carBody?.name}}</mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="manufacturer">
+            <mat-header-cell  *matHeaderCellDef>manufacturer</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.manufacturer?.name}}</mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="equipment1">
+            <mat-header-cell  *matHeaderCellDef>equipment1</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.equipment1?.name}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="equipment2">
+            <mat-header-cell  *matHeaderCellDef>equipment2</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.equipment2?.name}}</mat-cell>
+          </ng-container>
+  
+  
+          <ng-container matColumnDef="equipment3">
+            <mat-header-cell  *matHeaderCellDef>equipment3</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.equipment3?.name}}</mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="employee">
+            <mat-header-cell  *matHeaderCellDef>employee</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.employee.fullName}}</mat-cell>
+          </ng-container>
+          
+  
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              <button mat-icon-button color="primary" (click)="addNew()">
+                <mat-icon aria-label="Create">add</mat-icon>
+              </button>
+            </mat-header-cell>
+  
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="accent" (click)="editRow(i, row)">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+  
+              <button mat-icon-button color="accent" (click)="deleteRow(i, row)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+    
+          <mat-header-row  *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </ng-template>
+    </div>
+  </div>
+</div>
